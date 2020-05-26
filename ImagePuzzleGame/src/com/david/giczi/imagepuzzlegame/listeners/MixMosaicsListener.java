@@ -17,12 +17,12 @@ public class MixMosaicsListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		
 		game.mixImageMosaicsListBasedOnLogicBoard(NumberSquare.getNumberBoardStore().get(numberBoardCounter++));
 		game.displayMixedMosaics();
-
+			
 		if (numberBoardCounter == NumberSquare.getNumberBoardStore().size()) {
-
+			
 			game.clearMixedBoardsStore();
 			game.getTimerForMixMosaics().stop();
 			game.getTimerForSec().start();

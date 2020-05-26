@@ -4,6 +4,7 @@ package com.david.giczi.imagepuzzlegame.test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import org.junit.After;
 import org.junit.Test;
 import com.david.giczi.imagepuzzlegame.exceptions.InvalidInputValueException;
 import com.david.giczi.imagepuzzlegame.model.GameLogic;
@@ -18,10 +19,19 @@ import static org.junit.Assert.*;
  */
 public class NumberSquareClassTest {
 
+	
+	@After
+	public void clearBoardStore() {
+
+		NumberSquare.clearBoardStore();
+	}
+	
+	
     @Test
     public void testGetNumberSquareFromLeftAndUpSide() {
 
-        GameLogic logic = new GameLogic(BoardSize.MEDIUM);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.MEDIUM);
         logic.initGameBoard();
         NumberSquare.setNumberBoardSideValue(logic.getBoardSideValue());
         NumberSquare.setNumberBoard(logic.getBoard());
@@ -31,13 +41,14 @@ public class NumberSquareClassTest {
                 .getNumberSquare();
 
         assertEquals(Arrays.asList(11, 12, 0, 15), leftAndUpNumberSquare);
-
+        
     }
 
     @Test
     public void testGetNumberSquareFromRightAndUpSide() {
 
-        GameLogic logic = new GameLogic(BoardSize.MEDIUM);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.MEDIUM);
         logic.initGameBoard();
         Collections.swap(logic.getBoard(), 10, 15);
         NumberSquare.setNumberBoardSideValue(logic.getBoardSideValue());
@@ -48,13 +59,13 @@ public class NumberSquareClassTest {
                 .getNumberSquare();
 
         assertEquals(Arrays.asList(7, 8, 12, 0), rightAndUpNumberSquare);
-
     }
 
     @Test
     public void testGetNumberSquareFromRightAndDownSide() {
 
-        GameLogic logic = new GameLogic(BoardSize.MEDIUM);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.MEDIUM);
         logic.initGameBoard();
         Collections.swap(logic.getBoard(), 5, 15);
         NumberSquare.setNumberBoardSideValue(logic.getBoardSideValue());
@@ -65,13 +76,14 @@ public class NumberSquareClassTest {
                 .getNumberSquare();
 
         assertEquals(Arrays.asList(0, 7, 11, 10), rightAndDownNumberSquare);
-
+       
     }
 
     @Test
     public void testGetNumberSquareFromLeftAndDownSide() {
 
-        GameLogic logic = new GameLogic(BoardSize.LARGE);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.LARGE);
         logic.initGameBoard();
         Collections.swap(logic.getBoard(), 18, 24);
         NumberSquare.setNumberBoardSideValue(logic.getBoardSideValue());
@@ -82,13 +94,14 @@ public class NumberSquareClassTest {
                 .getNumberSquare();
 
         assertEquals(Arrays.asList(18, 0, 24, 23), leftAndDownNumberSquare);
-
+        
     }
 
     @Test
     public void testGetNumberSquareFromEverySide() {
 
-        GameLogic logic = new GameLogic(BoardSize.SMALL);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.SMALL);
         logic.initGameBoard();
         Collections.swap(logic.getBoard(), 4, 8);
         NumberSquare.setNumberBoardSideValue(logic.getBoardSideValue());
@@ -114,13 +127,14 @@ public class NumberSquareClassTest {
         assertEquals(Arrays.asList(2, 3, 6, 0), rightAndUpNumberSquare);
         assertEquals(Arrays.asList(0, 6, 5, 8), rightAndDownNumberSquare);
         assertEquals(Arrays.asList(4, 0, 8, 7), leftAndDownNumberSquare);
-
+       
     }
 
     @Test
     public void testGetNumberSquareIfItDoesNotExist() {
 
-        GameLogic logic = new GameLogic(BoardSize.MEDIUM);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.MEDIUM);
         logic.initGameBoard();
         NumberSquare.setNumberBoardSideValue(logic.getBoardSideValue());
         NumberSquare.setNumberBoard(logic.getBoard());
@@ -145,7 +159,7 @@ public class NumberSquareClassTest {
         assertEquals(Arrays.asList(), rightAndUpNumberSquare);
         assertEquals(Arrays.asList(), rightAndDownNumberSquare);
         assertEquals(Arrays.asList(), leftAndDownNumberSquare);
-
+        
     }
 
     @Test
@@ -159,6 +173,7 @@ public class NumberSquareClassTest {
         assertTrue(NumberSquare.isConsistsOfTheSameNumberValue(numberSquare1, numberSquare2));
         assertTrue(NumberSquare.isConsistsOfTheSameNumberValue(numberSquare1, numberSquare3));
         assertTrue(NumberSquare.isConsistsOfTheSameNumberValue(numberSquare1, numberSquare4));
+        
     }
 
     @Test
@@ -170,6 +185,7 @@ public class NumberSquareClassTest {
 
         assertFalse(NumberSquare.isConsistsOfTheSameNumberValue(numberSquare1, numberSquare2));
         assertFalse(NumberSquare.isConsistsOfTheSameNumberValue(numberSquare1, numberSquare4));
+       
     }
 
     @Test
@@ -183,6 +199,7 @@ public class NumberSquareClassTest {
                 && numberSquare.getNumberSquare().get(1) == 2
                 && numberSquare.getNumberSquare().get(2) == 3
                 && numberSquare.getNumberSquare().get(3) == 4);
+       
 
     }
 
@@ -197,6 +214,7 @@ public class NumberSquareClassTest {
                 && numberSquare.getNumberSquare().get(1) == 1
                 && numberSquare.getNumberSquare().get(2) == 2
                 && numberSquare.getNumberSquare().get(3) == 3);
+        
 
     }
 
@@ -211,6 +229,7 @@ public class NumberSquareClassTest {
                 && numberSquare.getNumberSquare().get(1) == 4
                 && numberSquare.getNumberSquare().get(2) == 1
                 && numberSquare.getNumberSquare().get(3) == 2);
+       
 
     }
 
@@ -225,6 +244,7 @@ public class NumberSquareClassTest {
                 && numberSquare.getNumberSquare().get(1) == 3
                 && numberSquare.getNumberSquare().get(2) == 4
                 && numberSquare.getNumberSquare().get(3) == 1);
+       
 
     }
 
@@ -246,7 +266,8 @@ public class NumberSquareClassTest {
     @Test
     public void testGetOneOfNumberSquareFromNumberSquareStoreButNotThisNumberSquare() {
 
-        GameLogic logic = new GameLogic(BoardSize.SMALL);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.SMALL);
         logic.initGameBoard();
         Collections.swap(logic.getBoard(), 4, 8);
         NumberSquare.setNumberBoardSideValue(logic.getBoardSideValue());
@@ -275,7 +296,8 @@ public class NumberSquareClassTest {
     @Test
     public void testGetOneOfNumberSquareFromNumberSquareStoreIfStoreIsEmpty() {
 
-        GameLogic logic = new GameLogic(BoardSize.MEDIUM);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.MEDIUM);
         logic.initGameBoard();
         NumberSquare.setNumberBoardSideValue(logic.getBoardSideValue());
         NumberSquare.setNumberBoard(logic.getBoard());
@@ -289,13 +311,14 @@ public class NumberSquareClassTest {
                 && gotNumberSquare.getNumberSquare().get(1) == 12
                 && gotNumberSquare.getNumberSquare().get(2) == 0
                 && gotNumberSquare.getNumberSquare().get(3) == 15);
-
+       
     }
 
     @Test
     public void testSetNumberSquareIntoNumberBoard() throws InvalidInputValueException {
 
-        GameLogic logic = new GameLogic(BoardSize.SMALL);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.SMALL);
         logic.initGameBoard();
         NumberSquare.setNumberBoardSideValue(logic.getBoardSideValue());
         NumberSquare.setNumberBoard(logic.getBoard());
@@ -359,7 +382,8 @@ public class NumberSquareClassTest {
     @Test
     public void testStoreNumberBoard() throws InvalidInputValueException {
 
-        GameLogic logic = new GameLogic(BoardSize.SMALL);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.SMALL);
         logic.initGameBoard();
         logic.mixGameBoardNumber();
 
@@ -373,7 +397,8 @@ public class NumberSquareClassTest {
 
         NumberSquare.clearBoardStore();
         
-        GameLogic logic = new GameLogic(BoardSize.SMALL);
+        GameLogic logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.SMALL);
         logic.initGameBoard();
         logic.mixGameBoardNumber();
 

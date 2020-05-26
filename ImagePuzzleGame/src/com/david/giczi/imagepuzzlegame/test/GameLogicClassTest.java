@@ -4,9 +4,12 @@ package com.david.giczi.imagepuzzlegame.test;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import com.david.giczi.imagepuzzlegame.model.GameLogic;
+import com.david.giczi.imagepuzzlegame.model.NumberSquare;
 import com.david.giczi.imagepuzzlegame.utils.BoardSize;
 
 import static org.junit.Assert.*;
@@ -18,11 +21,19 @@ import static org.junit.Assert.*;
 public class GameLogicClassTest {
 
     private GameLogic logic;
+    
+    @After
+	public void clearBoardStore() {
+
+		NumberSquare.clearBoardStore();
+	}
+    
 
     @Before
     public void createGameLogicObject() {
 
-        logic = new GameLogic(BoardSize.MEDIUM);
+        logic = new GameLogic();
+        logic.setBoardSideValue(BoardSize.MEDIUM);
     }
 
     @Test

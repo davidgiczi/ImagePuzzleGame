@@ -22,12 +22,6 @@ public class GameLogic {
     private List<Integer> savedBoard;
     private int numberOfMix = 10;
 
-    public GameLogic(BoardSize boardSize) {
-        
-    	boardSideValue = BoardSize.getBoardSizeValueByName(boardSize);
-    	
-    }
-
       
 	public int getBoardSideValue() {
 		return boardSideValue;

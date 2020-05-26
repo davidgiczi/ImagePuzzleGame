@@ -73,18 +73,19 @@ public class ImagePuzzleGame {
 	public ImagePuzzleGame(ImageMosaic mosaic) throws InvalidInputValueException {
 
 		this.mosaic = mosaic;
-		logic = new GameLogic(mosaic.getBoardSize());
+		logic = new GameLogic();
 		board = new ImagePuzzleBoard();
-	
+		
 		launch();
 	}
 
 	public void launch() throws InvalidInputValueException {
-
+		
 		loadImageMosaics();
 		board.createBoard(mosaic);
 		mixImageMosaics();
 		initCounters();
+		
 	}
 
 	private void loadImageMosaics() {
@@ -109,7 +110,7 @@ public class ImagePuzzleGame {
 		logic.mixGameBoardNumber();
 
 		while (logic.isTheEndOfTheGame()) {
-			NumberSquare.clearBoardStore();
+			clearMixedBoardsStore();
 			logic.mixGameBoardNumber();
 		}
 		timerForMixMosaics.start();

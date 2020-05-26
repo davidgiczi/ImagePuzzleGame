@@ -2,6 +2,7 @@ package com.david.giczi.imagepuzzlegame.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.Test;
 import com.david.giczi.imagepuzzlegame.exceptions.InvalidInputValueException;
 import com.david.giczi.imagepuzzlegame.model.ImageMosaic;
@@ -10,12 +11,14 @@ import com.david.giczi.imagepuzzlegame.utils.BoardSize;
 
 
 class SecTimerListenerClassTest {
-
+	
+	
+	
 	@Test
 	public void testSecTimer() throws InvalidInputValueException {
 		
-		ImageMosaic mosaic = new ImageMosaic("Papucskavalkád", BoardSize.LARGE);
-		ImagePuzzleGame game = new ImagePuzzleGame(mosaic);
+		ImagePuzzleGame game = new ImagePuzzleGame(new ImageMosaic("Papucskavalkád", BoardSize.MEDIUM));
+		
 		assertEquals(0, game.getSecondCounter());
 
 		try {
